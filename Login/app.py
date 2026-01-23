@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, render_template, redirect, url_for, session, flash
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
@@ -8,13 +9,13 @@ from itsdangerous import URLSafeTimedSerializer as Serializer
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
-app.secret_key = "holaaaa2342"
+app.secret_key = os.getenv("SECRET_KEY", "una-clave-por-defecto")
 
-client = MongoClient("mongodb+srv://joanesjuchetzm_db_user:jo110506.@cluster0.4xj97hd.mongodb.net/?appName=Cluster0")
-db = client['base_de_datos_login'] 
+client = MongoClient(os.getenv("MONGO_URI"))
+db = client['base_de_datos_login']
 collection = db['usuarios']
 
-SENDGRID_API_KEY = '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' 
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
 serializer = Serializer(app.secret_key, salt='password-reset-salt')
 
@@ -38,7 +39,7 @@ def home():
         return redirect(url_for('login'))
     return redirect(url_for('pagina_principal'))
 
-@app.route('/registro', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
         usuario = request.form['usuario']
