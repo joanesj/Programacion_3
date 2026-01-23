@@ -13,10 +13,10 @@ bcrypt = Bcrypt(app)
 app.secret_key = os.getenv("SECRET_KEY", "una-clave-por-defecto")
 
 client = MongoClient(os.getenv("MONGO_URI"))
-db = client['base_de_datos_login'] 
-collection = db['usuarios']
+db = client['db1'] 
+collection = db['usuarios'] 
 
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+SENDGRID_API_KEY = os.getenv("SENDGRID_KEY") 
 
 serializer = Serializer(app.secret_key, salt='password-reset-salt')
 
@@ -43,12 +43,6 @@ def admin_required(f):
             return redirect(url_for('pagina_principal'))
         return f(*args, **kwargs)
     return decorated_function
-
-@app.route('/')
-def home():
-    if 'usuario' not in session:
-        return redirect(url_for('login'))
-    return redirect(url_for('pagina_principal'))
 
 @app.route('/')
 def home():
@@ -151,14 +145,13 @@ def restablecer_contrasena(token):
         flash("Tu contraseña ha sido restablecida con éxito.", "success")
         return redirect(url_for('login'))
 
-    return render_template('reestablecer_contrasena.html', token=token)
+    return render_template('restablecer_contrasena.html')
 
 @app.route('/admin')
 @admin_required
 def panel_admin():
     todos_los_usuarios = list(collection.find())
     return render_template('panel_admin.html', usuarios=todos_los_usuarios)
-
 
 @app.route('/logout')
 def logout():
