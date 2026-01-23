@@ -39,7 +39,7 @@ def home():
         return redirect(url_for('login'))
     return redirect(url_for('pagina_principal'))
 
-@app.route('/registro', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def registro():
     if request.method == 'POST':
         usuario = request.form['usuario']
