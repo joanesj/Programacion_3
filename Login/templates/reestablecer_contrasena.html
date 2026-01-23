@@ -18,7 +18,7 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form method="POST">
+        <form method="POST" action="{{ url_for('restablecer_contrasena', token=request.view_args['token']) }}"></form>
             <label for="nueva_contrasena">Nueva Contraseña:</label>
             <div class="form-group password-group">
                 <i class="fas fa-lock icon"></i>
