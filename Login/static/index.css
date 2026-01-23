@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(180deg, #c3dceb, #c0eede);
+    background-image: url('fondo.jpeg');
     color: #333333; 
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(79, 135, 240);
+    background-color: rgb(172, 9, 221);
     padding: 8px 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -53,7 +53,7 @@ body {
 
 /* Dropdown (Perfil) */
 .dropdown .dropbtn {
-    background-color: rgb(79, 135, 240);
+    background-color: rgb(154, 79, 240);
     color: #fff;
     border: none;
     padding: 12px;
@@ -71,7 +71,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: rgb(79, 135, 240);
+    background-color: rgb(172, 78, 226);
     min-width: 200px;
     left: 50%;
     transform: translateX(-50%);
@@ -91,7 +91,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #061558;
+    background-color: #32024e;
 }
 
 .dropdown:hover .dropdown-content {
@@ -124,7 +124,7 @@ body {
     position: absolute;
     top: 60px;
     right: 10px;
-    background-color: #317fe6;
+    background-color: #8132b6;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -142,7 +142,7 @@ body {
 }
 
 .mobile-menu a:hover {
-    background-color: #1e079c;
+    background-color: #7013a5;
 }
 
 /* Main Page */
@@ -158,13 +158,13 @@ body {
 .main-container h2 {
     font-size: 36px;
     font-weight: 700;
-    color: #333333;
+    color: #fafafa;
     margin-bottom: 20px;
 }
 
 .main-container p {
     font-size: 18px;
-    color: #555555;
+    color: #e7e0e0;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -178,7 +178,7 @@ body {
 .novedades h3 {
     font-size: 28px;
     font-weight: 700;
-    color: #333333;
+    color: #f7f6f6;
     margin-bottom: 20px;
 }
 
@@ -190,20 +190,20 @@ body {
 
 .novedades ul li {
     font-size: 18px;
-    color: #555555;
+    color: #d8d7d7;
     margin-bottom: 10px;
     transition: color 0.3s ease-in-out;
 }
 
 .novedades ul li:hover {
-    color: #333333;
+    color: #c881f7;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #222222; 
+    background-color: #51096d; 
     color: #D3D3D3;
     font-size: 14px;
     margin-top: 20px;
@@ -216,7 +216,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #D3D3D3;
+    color: #fffcfc;
 }
 
 /* Responsive Design */
