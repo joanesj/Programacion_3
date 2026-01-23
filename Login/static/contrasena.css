@@ -89,7 +89,7 @@ button:active {
 
 /* Global Styles */
 body {
-    background-image: url(fondo.jpeg);
+    background-image: url(img/fondo3.jpg);
     color: #292828;
     font-family: 'Roboto', sans-serif;
     display: flex;
