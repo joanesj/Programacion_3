@@ -133,7 +133,7 @@ def restablecer_contrasena(token):
         flash("Tu contraseña ha sido restablecida con éxito.", "success")
         return redirect(url_for('login'))
 
-    return render_template('restablecer_contrasena.html', token=token)
+    return render_template('reestablecer_contrasena.html', token=token)
 
 @app.route('/logout')
 def logout():
