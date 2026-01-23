@@ -18,16 +18,15 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form method="POST" action="{{ url_for('restablecer_contrasena', token=request.view_args['token']) }}"></form>
+        <form method="POST" action="{{ url_for('restablecer_contrasena', token=request.view_args['token']) }}">
+            <form method="POST" action="/restablecer_contrasena/{{ token }}">
             <label for="nueva_contrasena">Nueva Contraseña:</label>
             <div class="form-group password-group">
                 <i class="fas fa-lock icon"></i>
-                <input type="password" name="nueva_contrasena" placeholder="Introduce tu nueva contraseña" id="nueva_contrasena" required>
-                <i class="toggle-password" id="togglePassword"></i>
-            </div>            
-            <button type="submit">Restablecer Contraseña</button>
-        </form>
-
+                <input type="password" name="nueva_contrasena" id="nueva_contrasena" placeholder="Introduce tu nueva contraseña" required>
+    </div>            
+    <button type="submit" style="cursor: pointer;">Restablecer Contraseña</button>
+</form>
         <p><a href="{{ url_for('login') }}">Volver al inicio de sesión</a></p>
     </div>
 
