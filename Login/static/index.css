@@ -1,8 +1,8 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #D3D3D3; /* Fondo LightGray */
-    color: #333333; /* Texto negro */
+    background: linear-gradient(180deg, #c3dceb, #c0eede);
+    color: #333333; 
     margin: 0;
     padding: 0;
 }
@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000; /* Fondo negro */
+    background-color: rgb(79, 135, 240);
     padding: 8px 80px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
@@ -53,8 +53,8 @@ body {
 
 /* Dropdown (Perfil) */
 .dropdown .dropbtn {
-    background-color: #333333;
-    color: #ffffff;
+    background-color: rgb(79, 135, 240);
+    color: #fff;
     border: none;
     padding: 12px;
     font-size: 18px;
@@ -71,18 +71,18 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #444444;
+    background-color: rgb(79, 135, 240);
     min-width: 200px;
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     border-radius: 6px;
-    padding: 10px 0; /* Espaciado interno */
+    padding: 10px 0; 
 }
 
 .dropdown-content a {
-    color: #ffffff;
+    color: #fdfdfd;
     padding: 10px 20px;
     text-decoration: none;
     display: block;
@@ -91,7 +91,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #555555;
+    background-color: #061558;
 }
 
 .dropdown:hover .dropdown-content {
@@ -124,7 +124,7 @@ body {
     position: absolute;
     top: 60px;
     right: 10px;
-    background-color: #333333;
+    background-color: #317fe6;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -142,7 +142,7 @@ body {
 }
 
 .mobile-menu a:hover {
-    background-color: #444444;
+    background-color: #1e079c;
 }
 
 /* Main Page */
@@ -203,8 +203,8 @@ body {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: #222222; /* Fondo gris oscuro */
-    color: #D3D3D3; /* Texto gris claro */
+    background-color: #222222; 
+    color: #D3D3D3;
     font-size: 14px;
     margin-top: 20px;
 }

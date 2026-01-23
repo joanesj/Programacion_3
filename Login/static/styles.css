@@ -1,6 +1,6 @@
 /* Global Styles */
 body {
-    background-color: lightgray; /* Fondo cambiado a lightgray */
+    background: linear-gradient(180deg, #03639b, #08c083);
     color: #000; /* Texto negro para mayor contraste */
     font-family: 'Roboto', sans-serif;
     display: flex;
@@ -9,19 +9,19 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0 20px;
-    -webkit-font-smoothing: antialiased; /* Mejora la visualización en dispositivos Apple */
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Login Container */
 .login-container {
-    background: #fff; /* Fondo del contenedor cambiado a blanco */
+    background: #c7e6f5;
     padding: 30px 40px;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Sombras más suaves */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 2);
     width: 100%;
     max-width: 450px;
     box-sizing: border-box;
-    border: 1px solid #000; /* Contorno negro */
+    border: 1px solid #000; 
     position: relative;
     transform: translateZ(0);
 }
@@ -31,7 +31,7 @@ body {
     text-align: center;
     margin-bottom: 20px;
     font-size: 26px;
-    color: #000; /* Título en negro */
+    color: #000; 
 }
 
 /* Form Fields */
@@ -46,7 +46,7 @@ body {
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #000; /* Íconos en negro */
+    color: #000;
     font-size: 20px;
 }
 
@@ -78,18 +78,18 @@ body {
     padding: 14px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(45deg, #D3D3D3, #BEBEBE); /* Botón degradado claro */
-    color: #000; /* Texto negro */
+    background: linear-gradient(45deg, #228b1e, #0f2c57); 
+    color: #ddddddc5;
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más tenue */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
 }
 
 .btn:hover {
-    background: linear-gradient(45deg, #BEBEBE, #D3D3D3);
+    background: linear-gradient(45deg, #25d86f, #0e095a);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
 }
@@ -107,7 +107,7 @@ body {
 
 .signup-link p, .login-link p {
     font-size: 14px;
-    color: #000; /* Texto en negro */
+    color: #000;
 }
 
 .signup-text, .login-text {
@@ -159,7 +159,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(45deg);
-    background: #000; /* Líneas en negro */
+    background: #000; 
     opacity: 1;
 }
 
@@ -169,7 +169,7 @@ body {
 
 /* Estilo del mensaje de error */
 .error-message {
-    color: #ff4d4d; /* Rojo claro para indicar error */
+    color: #ff4d4d;
     font-size: 14px;
     text-align: center;
     margin-bottom: 15px;
