@@ -13,7 +13,7 @@ bcrypt = Bcrypt(app)
 app.secret_key = os.getenv("SECRET_KEY", "una-clave-por-defecto")
 
 client = MongoClient(os.getenv("MONGO_URI"))
-db = client['db1'] 
+db = client['base_de_datos_login'] 
 collection = db['usuarios'] 
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_KEY") 
