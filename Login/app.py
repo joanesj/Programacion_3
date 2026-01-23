@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from itsdangerous import URLSafeTimedSerializer as Serializer
+from functools import wraps
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -32,6 +33,22 @@ def enviar_email(destinatario, asunto, cuerpo):
         print(f"Correo enviado con éxito! Status code: {response.status_code}")
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Verificamos si hay sesión y si el rol es 'admin'
+        if 'usuario' not in session or session.get('role') != 'admin':
+            flash("Acceso denegado: Se requieren permisos de administrador.")
+            return redirect(url_for('pagina_principal'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+@app.route('/')
+def home():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    return redirect(url_for('pagina_principal'))
 
 @app.route('/')
 def home():
@@ -73,6 +90,7 @@ def login():
         
         if user and bcrypt.check_password_hash(user['contrasena'], contrasena):
             session['usuario'] = usuario
+            session['role'] = user.get('role', 'cliente') 
             return redirect(url_for('pagina_principal'))
         else:
             flash("Usuario o contraseña incorrectos.")
@@ -134,6 +152,13 @@ def restablecer_contrasena(token):
         return redirect(url_for('login'))
 
     return render_template('reestablecer_contrasena.html', token=token)
+
+@app.route('/admin')
+@admin_required
+def panel_admin():
+    todos_los_usuarios = list(collection.find())
+    return render_template('panel_admin.html', usuarios=todos_los_usuarios)
+
 
 @app.route('/logout')
 def logout():
