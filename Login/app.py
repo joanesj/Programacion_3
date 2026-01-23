@@ -149,9 +149,9 @@ def restablecer_contrasena(token):
 
 @app.route('/admin')
 @admin_required
-def panel_admin():
+def zona_admin():
     todos_los_usuarios = list(collection.find())
-    return render_template('panel_admin.html', usuarios=todos_los_usuarios)
+    return render_template('zona_admin.html', usuarios=todos_los_usuarios)
 
 @app.route('/logout')
 def logout():
