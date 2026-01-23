@@ -1,0 +1,247 @@
+/* Global Styles */
+body {
+    background-image: url(img/fondo4.jpg);
+    color: #000; 
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0 20px;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+}
+
+/* Login Container */
+.login-container {
+    background: #cc94e9;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 2);
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+    border: 1px solid #000; 
+    position: relative;
+    transform: translateZ(0);
+}
+
+/* Form */
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #000; 
+}
+
+/* Form Fields */
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #610677;
+    font-size: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 14px 14px 45px;
+    border: 2px solid rgba(0, 0, 0, 0.3); 
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000; 
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    background-color: rgba(0, 0, 0, 0.1); 
+    border-color: #000;
+}
+
+.form-group input::placeholder {
+    color: #9d0fd4; 
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #9714b1, #0647a8); 
+    color: #fff9f9c5;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #9625d8, #0e095a);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Links */
+.signup-link, .login-link {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.signup-link p, .login-link p {
+    font-size: 14px;
+    color: #000;
+}
+
+.signup-text, .login-text {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.signup-text:hover, .login-text:hover {
+    color: #444; 
+    transform: scale(1.1);
+}
+
+/* Password Toggle Icon */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid #000;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.toggle-password::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 6px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: transparent;
+}
+
+.toggle-password::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 2px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #000; 
+    opacity: 1;
+}
+
+.toggle-password.active::after {
+    opacity: 0;
+}
+
+/* Estilo del mensaje de error */
+.error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 15px;
+    border: 1px solid #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.admin-table-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #f7f7f7;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+/* Estilos de la tabla */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: white;
+}
+
+.admin-table th {
+    background-color: #b648b9; 
+    color: white;
+    padding: 18px;
+    text-align: left;
+    font-size: 16px;
+    border: none;
+}
+
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    color: #333333;
+    font-size: 15px;
+}
+
+.admin-table tr:hover {
+    background-color: #caa6c9;
+}
+
+.badge-admin {
+    color: #dfc9e2;
+    font-weight: bold;
+    background: #fff0e0;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.badge-cliente {
+    color: #666666;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Botón de regreso */
+.btn-volver {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #951ba0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.btn-volver:hover {
+    transform: translateX(-5px);
+}

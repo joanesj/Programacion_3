@@ -22,6 +22,13 @@
                         <a href="/mi_perfil">
                             <i class="fas fa-user"></i> Mi Perfil
                         </a>
+                        
+                        {% if session['role'] == 'admin' %}
+                        <a href="/admin" style="color: #ffffff; ">
+                            <i class="fas fa-tools"></i> Administración
+                        </a>
+                        {% endif %}
+
                         <a href="/logout">
                             <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                         </a>
@@ -48,6 +55,11 @@
         <div class="welcome-text">
             <h2>¡Bienvenido a CineNext!</h2>
             <p>Nos alegra tenerte aquí. Explora nuestras últimas peliculas y series en el mejor lugar para comprarlas.</p>
+
+                {% if session['role'] == 'admin' %}
+                <p style="color: #7a1aa0;">Estás en modo: <strong>Administrador</strong></p>
+            {% endif %}
+            
         </div>
 
         <section class="novedades">
