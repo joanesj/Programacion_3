@@ -1,7 +1,7 @@
 /* Global Styles */
 body {
-    background: linear-gradient(180deg, #82039b, #41015a);
-    color: #000; /* Texto negro para mayor contraste */
+    background-image: url(fondo.jpeg);
+    color: #000; 
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
@@ -53,10 +53,10 @@ body {
 .form-group input {
     width: 100%;
     padding: 14px 14px 14px 45px;
-    border: 2px solid rgba(0, 0, 0, 0.3); /* Contorno tenue */
+    border: 2px solid rgba(0, 0, 0, 0.3); 
     border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.05); /* Fondo claro */
-    color: #000; /* Texto negro */
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000; 
     outline: none;
     font-size: 16px;
     transition: all 0.3s ease;
@@ -64,8 +64,8 @@ body {
 }
 
 .form-group input:focus {
-    background-color: rgba(0, 0, 0, 0.1); /* Fondo más oscuro al enfocar */
-    border-color: #000; /* Contorno negro al enfocar */
+    background-color: rgba(0, 0, 0, 0.1); 
+    border-color: #000;
 }
 
 .form-group input::placeholder {
@@ -111,14 +111,14 @@ body {
 }
 
 .signup-text, .login-text {
-    color: #000; /* Links en negro */
+    color: #000;
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .signup-text:hover, .login-text:hover {
-    color: #444; /* Texto más oscuro al pasar el cursor */
+    color: #444; 
     transform: scale(1.1);
 }
 
@@ -132,7 +132,7 @@ body {
     height: 20px;
     cursor: pointer;
     background: transparent;
-    border: 2px solid #000; /* Contorno negro */
+    border: 2px solid #000;
     border-radius: 50%;
     transition: all 0.3s ease;
     box-sizing: border-box;

@@ -1,7 +1,96 @@
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 26px;
+    color: #4b4949; 
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c00fec;
+    font-size: 20px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 14px 14px 45px; 
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: rgba(224, 136, 205, 0.938); 
+    color: #f5f1f1;
+    outline: none;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    background-color: rgba(0, 0, 0, 0.1); 
+    border-color: #000;
+}
+
+.form-group input::placeholder {
+    color: #c7c1c1;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #a743c5, #4b0b50); 
+    color: #e0d8d8;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 1);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #920bad, #b90dcf);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 1);
+    transform: translateY(-3px);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensajes de éxito o error (común para ambos) */
+.flash-message {
+    background-color: #e9f7ef; 
+    color: #4CAF50; 
+    border: 1px solid #c3e6cb; 
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.flash-message.success, .flash-message.error {
+    background-color: #e9f7ef;
+    color: #4CAF50;
+    border: 1px solid #c3e6cb;
+}
+
 /* Global Styles */
 body {
-    background-color: lightgray; /* Fondo cambiado a lightgray */
-    color: #000; /* Texto negro para mayor contraste */
+    background-image: url(fondo.jpeg);
+    color: #292828;
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
@@ -9,21 +98,19 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0 20px;
-    -webkit-font-smoothing: antialiased; /* Mejora la visualización en dispositivos Apple */
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Recuperar Contraseña Container */
 .container {
-    background: #fff; /* Fondo del contenedor cambiado a blanco */
+    background: #d3a3da; /* Fondo del contenedor cambiado a blanco */
     padding: 30px 40px;
     border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Sombras más suaves */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 2);
     width: 100%;
     max-width: 450px;
     box-sizing: border-box;
-    border: 1px solid #000; /* Contorno negro */
+    border: 1px solid #000;
     position: relative;
     transform: translateZ(0);
 }
-
-/* Form */
