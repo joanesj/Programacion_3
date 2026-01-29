@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    background-image: url('img/fondo.jpeg');
+    background: linear-gradient(135deg, #8825af, #6a1b9a);
     color: #333333; 
     margin: 0;
     padding: 0;
