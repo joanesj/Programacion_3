@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Productos - CineNext</title>
+    <link rel="shortcut icon" href="../static/img/logo.jpeg" type="image/png">
+    <link rel="stylesheet" href="../static/admin_productos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <h1>Panel de Administración</h1>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="/pagina_principal">INICIO</a></li>
+                <li><a href="/tienda">TIENDA</a></li>
+                <li><a href="/admin/productos" class="active">ADMIN PRODUCTOS</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">{{ usuario[0].upper() }}</a>
+                    <div class="dropdown-content">
+                        <a href="/mi_perfil">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                        <a href="/admin">
+                            <i class="fas fa-tools"></i> Administración
+                        </a>
+                        <a href="/logout">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+        <!-- Formulario para crear/editar producto -->
+        <section class="formulario-section">
+            <h2 id="form-title">
+                <i class="fas fa-plus-circle"></i> Crear Nuevo Producto
+            </h2>
+            
+            <form id="form-producto" class="producto-form">
+                <input type="hidden" id="producto-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">
+                            <i class="fas fa-tag"></i> Nombre del Producto *
+                        </label>
+                        <input type="text" id="nombre" required placeholder="Ej: Inception BluRay">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo">
+                            <i class="fas fa-barcode"></i> Código *
+                        </label>
+                        <input type="text" id="codigo" required placeholder="Ej: PROD-001">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precio">
+                            <i class="fas fa-dollar-sign"></i> Precio *
+                        </label>
+                        <input type="number" id="precio" step="0.01" required placeholder="0.00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoria">
+                            <i class="fas fa-list"></i> Categoría *
+                        </label>
+                        <select id="categoria" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="peliculas">Películas</option>
+                            <option value="series">Series</option>
+                            <option value="libros">Libros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stock">
+                            <i class="fas fa-boxes"></i> Stock
+                        </label>
+                        <input type="number" id="stock" value="0" min="0" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagen">
+                            <i class="fas fa-image"></i> URL de Imagen
+                        </label>
+                        <input type="text" id="imagen" placeholder="./img/producto.jpg">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="descripcion">
+                        <i class="fas fa-align-left"></i> Descripción *
+                    </label>
+                    <textarea id="descripcion" rows="4" required placeholder="Descripción detallada del producto..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="btn-submit">
+                        <i class="fas fa-save"></i> <span id="btn-text">Crear Producto</span>
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="btn-cancelar" style="display: none;">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Lista de productos existentes -->
+        <section class="lista-section">
+            <div class="lista-header">
+                <h2><i class="fas fa-box-open"></i> Productos Registrados</h2>
+                <div class="search-container">
+                    <input type="text" id="search-admin" placeholder="Buscar productos...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+
+            <div id="loading-productos" class="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> Cargando productos...
+            </div>
+
+            <div id="tabla-productos-container">
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-productos">
+                        <!-- Los productos se cargarán aquí -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="no-productos" class="no-results" style="display: none;">
+                <i class="fas fa-box-open"></i>
+                <p>No hay productos registrados</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de confirmación -->
+    <div id="modal-confirmacion" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación</h3>
+            <p>¿Estás seguro de que deseas eliminar este producto?</p>
+            <p class="modal-producto-info" id="modal-producto-nombre"></p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="btn-confirmar-eliminar">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+                <button class="btn btn-secondary" id="btn-cancelar-modal">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de notificaciones -->
+    <div id="toast" class="toast"></div>
+
+    <footer>
+        <p>&copy; 2026 CineNext - Panel de Administración</p>
+    </footer>
+
+    <script src="../static/admin_productos.js"></script>
+</body>
+</html>
