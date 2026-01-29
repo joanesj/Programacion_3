@@ -64,11 +64,7 @@ header {
     border-radius: 8px;
 }
 
-.navbar-menu li a:hover,
-.navbar-menu li a.active {
-    color: var(--color-primary);
-    background: var(--color-light);
-}
+
 
 .dropdown {
     position: relative;
