@@ -128,11 +128,11 @@ function crearItemCard(item) {
                     <i class="fas fa-minus"></i>
                 </button>
                 <input type="number" 
-                       value="${item.cantidad}" 
-                       min="1" 
-                       max="${item.stock_disponible}"
-                       onchange="actualizarCantidad('${item._id}', this.value)"
-                       ${sinStock ? 'disabled' : ''}>
+                        value="${item.cantidad}" 
+                        min="1" 
+                        max="${item.stock_disponible}"
+                        onchange="actualizarCantidad('${item._id}', this.value)"
+                        ${sinStock ? 'disabled' : ''}>
                 <button class="btn-cantidad" onclick="cambiarCantidad('${item._id}', ${item.cantidad + 1})"
                         ${item.cantidad >= item.stock_disponible ? 'disabled' : ''}>
                     <i class="fas fa-plus"></i>
