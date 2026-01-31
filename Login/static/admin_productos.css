@@ -392,6 +392,15 @@ header {
     font-size: 0.9rem;
 }
 
+.btn-stock {
+    background: var(--color-warning);
+}
+
+.btn-stock:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+}
+
 .btn-editar {
     background: var(--color-info);
 }

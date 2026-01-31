@@ -15,7 +15,24 @@ const noResults = document.getElementById('no-results');
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
     configurarEventos();
+    actualizarBadgeCarrito();
 });
+
+// Actualizar badge del carrito
+async function actualizarBadgeCarrito() {
+    try {
+        const response = await fetch('/api/carrito/cantidad');
+        const data = await response.json();
+        
+        const badges = document.querySelectorAll('.cart-badge');
+        badges.forEach(badge => {
+            badge.textContent = data.cantidad;
+            badge.style.display = data.cantidad > 0 ? 'inline-block' : 'none';
+        });
+    } catch (error) {
+        console.error('Error al actualizar badge:', error);
+    }
+}
 
 // Configurar event listeners
 function configurarEventos() {
@@ -136,6 +153,8 @@ function crearTarjetaProducto(producto) {
         'libros': 'Libros'
     }[producto.categoria] || producto.categoria;
     
+    const sinStock = producto.stock === 0;
+    
     div.innerHTML = `
         <div class="producto-imagen-container">
             <img src="${producto.imagen || '../static/img/default.jpg'}" 
@@ -159,13 +178,47 @@ function crearTarjetaProducto(producto) {
                        </span>`
                 }
             </div>
-            <button class="btn-ver-detalles" onclick="verDetalles('${producto._id}')">
-                <i class="fas fa-eye"></i> Ver Detalles
-            </button>
+            <div class="producto-acciones">
+                <button class="btn-ver-detalles" onclick="verDetalles('${producto._id}')">
+                    <i class="fas fa-eye"></i> Ver Detalles
+                </button>
+                <button class="btn-agregar-carrito" onclick="agregarAlCarrito('${producto._id}')" 
+                        ${sinStock ? 'disabled' : ''}>
+                    <i class="fas fa-shopping-cart"></i> ${sinStock ? 'Sin Stock' : 'Agregar'}
+                </button>
+            </div>
         </div>
     `;
     
     return div;
+}
+
+// Agregar producto al carrito
+async function agregarAlCarrito(productoId) {
+    try {
+        const response = await fetch('/api/carrito/agregar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                producto_id: productoId,
+                cantidad: 1
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Error al agregar al carrito');
+        }
+        
+        mostrarToast('¡Producto agregado al carrito!', 'success');
+        actualizarBadgeCarrito();
+    } catch (error) {
+        console.error('Error:', error);
+        mostrarToast(error.message, 'error');
+    }
 }
 
 // Ver detalles de un producto
@@ -192,6 +245,8 @@ function mostrarModalDetalles(producto) {
         'series': 'Series',
         'libros': 'Libros'
     }[producto.categoria] || producto.categoria;
+    
+    const sinStock = producto.stock === 0;
     
     const modal = document.createElement('div');
     modal.className = 'modal-detalles';
@@ -222,6 +277,10 @@ function mostrarModalDetalles(producto) {
                                </span>`
                         }
                     </div>
+                    <button class="btn-agregar-modal" onclick="agregarAlCarritoDesdeModal('${producto._id}')"
+                            ${sinStock ? 'disabled' : ''}>
+                        <i class="fas fa-shopping-cart"></i> ${sinStock ? 'Sin Stock' : 'Agregar al Carrito'}
+                    </button>
                 </div>
             </div>
         </div>
@@ -235,6 +294,13 @@ function mostrarModalDetalles(producto) {
             modal.remove();
         }
     });
+}
+
+// Agregar al carrito desde el modal
+async function agregarAlCarritoDesdeModal(productoId) {
+    await agregarAlCarrito(productoId);
+    // Opcional: cerrar el modal después de agregar
+    document.querySelector('.modal-detalles')?.remove();
 }
 
 // Utilidades
@@ -253,9 +319,18 @@ function truncarTexto(texto, maxLength) {
 }
 
 function mostrarError(mensaje) {
+    mostrarToast(mensaje, 'error');
+}
+
+function mostrarToast(mensaje, tipo = 'info') {
     const toast = document.createElement('div');
-    toast.className = 'toast toast-error';
-    toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${mensaje}`;
+    toast.className = `toast toast-${tipo}`;
+    const iconos = {
+        'success': 'fa-check-circle',
+        'error': 'fa-exclamation-circle',
+        'info': 'fa-info-circle'
+    };
+    toast.innerHTML = `<i class="fas ${iconos[tipo]}"></i> ${mensaje}`;
     document.body.appendChild(toast);
     
     setTimeout(() => toast.classList.add('show'), 100);

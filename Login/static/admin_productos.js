@@ -115,6 +115,9 @@ function crearFilaProducto(producto) {
             }
         </td>
         <td class="acciones">
+            <button class="btn-accion btn-stock" onclick="abrirModalStock('${producto._id}', ${producto.stock})" title="Actualizar Stock">
+                <i class="fas fa-boxes"></i>
+            </button>
             <button class="btn-accion btn-editar" onclick="editarProducto('${producto._id}')" title="Editar">
                 <i class="fas fa-edit"></i>
             </button>
@@ -367,4 +370,103 @@ function mostrarToast(mensaje, tipo = 'info') {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
+}
+
+// ==================== FUNCIONES DE STOCK ====================
+
+let productoStockActual = null;
+
+// Abrir modal de stock
+function abrirModalStock(productoId, stockActual) {
+    productoStockActual = productoId;
+    
+    // Crear modal dinámicamente
+    const modalStock = document.createElement('div');
+    modalStock.id = 'modal-stock';
+    modalStock.className = 'modal';
+    modalStock.style.display = 'flex';
+    
+    modalStock.innerHTML = `
+        <div class="modal-content">
+            <h3><i class="fas fa-boxes"></i> Actualizar Stock</h3>
+            <p>Stock actual: <strong>${stockActual}</strong> unidades</p>
+            <div class="form-group">
+                <label for="nuevo-stock">
+                    <i class="fas fa-box"></i> Nuevo Stock
+                </label>
+                <input type="number" 
+                       id="nuevo-stock" 
+                       min="0" 
+                       value="${stockActual}" 
+                       placeholder="Cantidad">
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="actualizarStock()">
+                    <i class="fas fa-save"></i> Actualizar
+                </button>
+                <button class="btn btn-secondary" onclick="cerrarModalStock()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modalStock);
+    
+    // Focus en el input
+    setTimeout(() => {
+        document.getElementById('nuevo-stock').focus();
+        document.getElementById('nuevo-stock').select();
+    }, 100);
+    
+    // Cerrar con click fuera
+    modalStock.addEventListener('click', (e) => {
+        if (e.target === modalStock) cerrarModalStock();
+    });
+    
+    // Cerrar con Enter
+    document.getElementById('nuevo-stock').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') actualizarStock();
+    });
+}
+
+// Cerrar modal de stock
+function cerrarModalStock() {
+    const modalStock = document.getElementById('modal-stock');
+    if (modalStock) {
+        modalStock.remove();
+    }
+    productoStockActual = null;
+}
+
+// Actualizar stock
+async function actualizarStock() {
+    const nuevoStock = parseInt(document.getElementById('nuevo-stock').value);
+    
+    if (isNaN(nuevoStock) || nuevoStock < 0) {
+        mostrarToast('Stock inválido', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/admin/stock/${productoStockActual}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ stock: nuevoStock })
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.error || 'Error al actualizar stock');
+        }
+        
+        mostrarToast('Stock actualizado correctamente', 'success');
+        cerrarModalStock();
+        cargarProductos();
+    } catch (error) {
+        mostrarToast(error.message, 'error');
+    }
 }
