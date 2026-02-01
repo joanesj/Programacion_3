@@ -190,13 +190,13 @@ body {
 
 .novedades ul li {
     font-size: 18px;
-    color: #d8d7d7;
+    color: #d812c7;
     margin-bottom: 10px;
     transition: color 0.3s ease-in-out;
 }
 
 .novedades ul li:hover {
-    color: #c881f7;
+    color: #470970;
 }
 
 /* Footer */
