@@ -1,248 +1,417 @@
-/* Global Styles */
-body {
-    background-image: url(img/fondo4.jpg);
-    background-size: cover;
-    color: #000; 
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+* {
     margin: 0;
-    padding: 0 20px;
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
-}
-
-/* Login Container */
-.login-container {
-    background: #cc94e9;
-    padding: 30px 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 2);
-    width: 100%;
-    max-width: 450px;
-    box-sizing: border-box;
-    border: 1px solid #000; 
-    position: relative;
-    transform: translateZ(0);
-}
-
-/* Form */
-.login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 26px;
-    color: #000; 
-}
-
-/* Form Fields */
-.form-group {
-    position: relative;
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.form-group .icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #610677;
-    font-size: 20px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 14px 14px 14px 45px;
-    border: 2px solid rgba(0, 0, 0, 0.3); 
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.05);
-    color: #000; 
-    outline: none;
-    font-size: 16px;
-    transition: all 0.3s ease;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.form-group input:focus {
-    background-color: rgba(0, 0, 0, 0.1); 
-    border-color: #000;
+:root {
+    --color-primary: #8825af;
+    --color-secondary: #6a1b9a;
+    --color-accent: #ab47bc;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+    --color-dark: #1f2937;
+    --color-light: #f3f4f6;
+    --color-white: #ffffff;
 }
 
-.form-group input::placeholder {
-    color: #9d0fd4; 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    min-height: 100vh;
+    color: var(--color-dark);
 }
 
-/* Buttons */
-.btn {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(45deg, #9714b1, #0647a8); 
-    color: #fff9f9c5;
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+/* Header y Navbar */
+header {
+    background: var(--color-white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.btn:hover {
-    background: linear-gradient(45deg, #9625d8, #0e095a);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
+.navbar {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
 }
 
-.btn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.navbar-brand h1 {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.5rem;
 }
 
-/* Links */
-.signup-link, .login-link {
-    text-align: center;
-    margin-top: 25px;
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
 }
 
-.signup-link p, .login-link p {
-    font-size: 14px;
-    color: #000;
-}
-
-.signup-text, .login-text {
-    color: #000;
-    font-weight: bold;
+.navbar-menu li a {
     text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.signup-text:hover, .login-text:hover {
-    color: #444; 
-    transform: scale(1.1);
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+    color: var(--color-primary);
+    background: var(--color-light);
 }
 
-/* Password Toggle Icon */
-.toggle-password {
+.cart-link {
+    position: relative;
+}
+
+.cart-badge {
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: -5px;
+    right: -5px;
+    background: var(--color-danger);
+    color: white;
+    border-radius: 50%;
     width: 20px;
     height: 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50%;
     cursor: pointer;
-    background: transparent;
-    border: 2px solid #000;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.toggle-password::before {
-    content: '';
+.dropdown-content {
+    display: none;
     position: absolute;
-    width: 10px;
-    height: 6px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    border: 2px solid #000;
-    background-color: transparent;
+    right: 0;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1000;
 }
 
-.toggle-password::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 2px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(45deg);
-    background: #000; 
-    opacity: 1;
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content {
+    display: block;
 }
 
-.toggle-password.active::after {
-    opacity: 0;
+.dropdown-content a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    text-decoration: none;
+    color: var(--color-dark);
+    transition: background 0.3s;
 }
 
-/* Estilo del mensaje de error */
-.error-message {
-    color: #ff4d4d;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 15px;
-    border: 1px solid #ff4d4d;
-    background-color: rgba(255, 77, 77, 0.1);
-    padding: 10px;
-    border-radius: 5px;
+.dropdown-content a:hover {
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: var(--color-dark);
+    border-radius: 2px;
+}
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.hidden {
+    display: none;
+}
+
+.mobile-menu a {
+    padding: 0.8rem;
+    text-decoration: none;
+    color: var(--color-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.mobile-menu a:hover {
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+/* Main Container */
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
 .admin-table-container {
-    max-width: 1100px;
-    margin: 40px auto;
-    background: #f7f7f7;
-    padding: 30px;
+    background: white;
     border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos de la tabla */
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 25px;
-    background-color: white;
+/* Admin Header */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
-.admin-table th {
-    background-color: #b648b9; 
-    color: white;
-    padding: 18px;
-    text-align: left;
-    font-size: 16px;
-    border: none;
-}
-
-.admin-table td {
-    padding: 15px;
-    border-bottom: 1px solid #eeeeee;
-    color: #333333;
-    font-size: 15px;
-}
-
-.admin-table tr:hover {
-    background-color: #caa6c9;
-}
-
-.badge-admin {
-    color: #dfc9e2;
-    font-weight: bold;
-    background: #fff0e0;
-    padding: 5px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-}
-
-.badge-cliente {
-    color: #666666;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-/* Botón de regreso */
-.btn-volver {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: #951ba0;
+.btn-volver,
+.btn-admin-productos {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.3s ease;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.btn-volver {
+    background: #6b7280;
+    color: white;
 }
 
 .btn-volver:hover {
-    transform: translateX(-5px);
+    background: #4b5563;
+    transform: translateY(-2px);
+}
+
+.btn-admin-productos {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+}
+
+.btn-admin-productos:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(136, 37, 175, 0.4);
+}
+
+/* Welcome Text */
+.welcome-text {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-light);
+}
+
+.welcome-text h2 {
+    color: var(--color-dark);
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.welcome-text h2 i {
+    color: var(--color-primary);
+}
+
+.welcome-text p {
+    color: #6b7280;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.total-usuarios {
+    color: var(--color-dark);
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--color-light);
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.total-usuarios strong {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+}
+
+/* Tabla */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.admin-table thead {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.admin-table th {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.admin-table th i {
+    margin-right: 0.5rem;
+}
+
+.admin-table tbody tr {
+    border-bottom: 1px solid var(--color-light);
+    transition: background 0.3s;
+}
+
+.admin-table tbody tr:hover {
+    background: var(--color-light);
+}
+
+.admin-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Badges de Rol */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.badge-admin {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-admin i {
+    color: #f59e0b;
+}
+
+.badge-cliente {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-cliente i {
+    color: #3b82f6;
+}
+
+/* Footer */
+footer {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .navbar-menu {
+        display: none;
+    }
+    
+    .navbar-menu.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .admin-table-container {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+    
+    .admin-table {
+        font-size: 0.9rem;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 0.8rem;
+    }
 }
