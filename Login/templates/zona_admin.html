@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Administrativa</title>
+    <title>Zona Administrativa - CineNext</title>
     <link rel="shortcut icon" href="../static/img/logo.jpeg" type="image/png">
     <link rel="stylesheet" href="../static/zona_admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,25 +12,81 @@
     <header>
         <nav class="navbar">
             <div class="navbar-brand">
+                <h1>Panel de Administración</h1>
             </div>
             <ul class="navbar-menu">
+                <li><a href="/pagina_principal">INICIO</a></li>
+                <li><a href="/tienda">TIENDA</a></li>
+                <li><a href="/carrito" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i> CARRITO
+                    <span class="cart-badge" id="cart-badge-nav">0</span>
+                </a></li>
+                <li><a href="/admin/productos">ADMIN PRODUCTOS</a></li>
+                <li><a href="/admin" class="active">ADMIN USUARIOS</a></li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">A</a>
+                    <div class="dropdown-content">
+                        <a href="/mi_perfil">
+                            <i class="fas fa-user"></i> Mi Perfil
+                        </a>
+                        <a href="/admin/productos">
+                            <i class="fas fa-box"></i> Administrar Productos
+                        </a>
+                        <a href="/admin">
+                            <i class="fas fa-tools"></i> Administración
+                        </a>
+                        <a href="/logout">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                        </a>
+                    </div>
+                </li>
             </ul>
-        </nav>
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </nav>
         <div class="mobile-menu hidden">
+            <a href="/pagina_principal">
+                <i class="fas fa-home"></i> Inicio
+            </a>
+            <a href="/tienda">
+                <i class="fas fa-store"></i> Tienda
+            </a>
+            <a href="/carrito">
+                <i class="fas fa-shopping-cart"></i> Carrito
+            </a>
+            <a href="/admin/productos">
+                <i class="fas fa-box"></i> Admin Productos
+            </a>
+            <a href="/admin">
+                <i class="fas fa-users-cog"></i> Admin Usuarios
+            </a>
+            <a href="/mi_perfil">
+                <i class="fas fa-user"></i> Mi Perfil
+            </a>
+            <a href="/logout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar sesión
             </a>
         </div>
     </header>
 
     <main class="main-container">
         <div class="admin-table-container">
-            <a href="{{ url_for('pagina_principal') }}" class="btn-volver">
-                <i class="fas fa-arrow-left"></i> Regresar al Inicio
-            </a>
+            <div class="admin-header">
+                <a href="/pagina_principal" class="btn-volver">
+                    <i class="fas fa-arrow-left"></i> Volver al Inicio
+                </a>
+                <a href="/admin/productos" class="btn-admin-productos">
+                    <i class="fas fa-box"></i> Gestión de Productos
+                </a>
+            </div>
             
             <div class="welcome-text">
-                <h2>Gestión de Usuarios</h2>
+                <h2><i class="fas fa-users-cog"></i> Gestión de Usuarios</h2>
                 <p>Usuarios registrados en la base de datos de CineNext.</p>
+                <p class="total-usuarios">Total de usuarios: <strong>{{ usuarios|length }}</strong></p>
             </div>
 
             <table class="admin-table">
@@ -38,6 +94,7 @@
                     <tr>
                         <th><i class="fas fa-user"></i> Usuario</th>
                         <th><i class="fas fa-envelope"></i> Email</th>
+                        <th><i class="fas fa-shield-alt"></i> Rol</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,9 +104,13 @@
                         <td>{{ u.email }}</td>
                         <td>
                             {% if u.get('role') == 'admin' %}
-                                <span style="color: #8825af; font-weight: bold;">Admin</span>
+                                <span class="badge badge-admin">
+                                    <i class="fas fa-crown"></i> Admin
+                                </span>
                             {% else %}
-                                <span style="color: #8825af; font-weight: bold;">Cliente</span>
+                                <span class="badge badge-cliente">
+                                    <i class="fas fa-user"></i> Cliente
+                                </span>
                             {% endif %}
                         </td>
                     </tr>
@@ -59,13 +120,61 @@
         </div>
     </main>
     
+    <footer>
+        <p>&copy; 2026 CineNext - Panel de Administración</p>
+    </footer>
+
     <script>
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');
 
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Menú desplegable
+        const dropdown = document.querySelector('.dropdown');
+        const dropbtn = document.querySelector('.dropbtn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        if (dropdown && dropbtn && dropdownContent) {
+            dropbtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            dropdownContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+
+        // Actualizar badge del carrito
+        async function actualizarBadgeCarrito() {
+            try {
+                const response = await fetch('/api/carrito/cantidad');
+                const data = await response.json();
+                
+                const badge = document.getElementById('cart-badge-nav');
+                if (badge) {
+                    badge.textContent = data.cantidad;
+                    badge.style.display = data.cantidad > 0 ? 'inline-block' : 'none';
+                }
+            } catch (error) {
+                console.error('Error al actualizar badge:', error);
+            }
+        }
+
+        // Cargar badge al iniciar
+        document.addEventListener('DOMContentLoaded', actualizarBadgeCarrito);
     </script>
 </body>
 </html>
